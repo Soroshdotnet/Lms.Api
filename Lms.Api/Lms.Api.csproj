@@ -15,4 +15,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Lms.Core\Lms.Core.csproj" />
+    <ProjectReference Include="..\Lms.Data\Lms.Data.csproj" />
+  </ItemGroup>
+
 </Project>
