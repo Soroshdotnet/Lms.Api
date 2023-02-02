@@ -1,5 +1,8 @@
-
+ï»¿
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Lms.Api.Data;
 
 namespace Lms.Api
 {
@@ -8,6 +11,8 @@ namespace Lms.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<LmsApiContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("LmsApiContext") ?? throw new InvalidOperationException("Connection string 'LmsApiContext' not found.")));
 
             // Add services to the container.
 
@@ -18,11 +23,12 @@ namespace Lms.Api
             //builder.Services.AddSwaggerGen();
 
             //**New**//
+            //Dessa tillï¿½gg hjï¿½lper oss att mappa mot Json och Xml.
+
             builder.Services.AddControllers(opt => opt.ReturnHttpNotAcceptable = true)
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters() ;
 
-            //Dessa tillägg hjälper oss att mappa mot Json och Xml.
             /*****************************************************************/
 
 
