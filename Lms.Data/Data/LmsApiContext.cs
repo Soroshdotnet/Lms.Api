@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Lms.Core.Enteties;
 
-namespace Lms.Api.Data
+namespace Lms.Data.Data
 {
     public class LmsApiContext : DbContext
     {
