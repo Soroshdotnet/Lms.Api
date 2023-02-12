@@ -3,12 +3,13 @@ using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Lms.Data.Data;
+using Lms.Api.Extensions;
 
 namespace Lms.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<LmsApiContext>(options =>
@@ -18,9 +19,7 @@ namespace Lms.Api
 
             //** orginal **************************************************//
             //builder.Services.AddControllers();
-            //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            //builder.Services.AddEndpointsApiExplorer();
-            //builder.Services.AddSwaggerGen();
+            //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/
 
             //**New**//
             //Dessa till�gg hj�lper oss att mappa mot Json och Xml.
@@ -28,11 +27,16 @@ namespace Lms.Api
             builder.Services.AddControllers(opt => opt.ReturnHttpNotAcceptable = true)
                 .AddNewtonsoftJson()
                 .AddXmlDataContractSerializerFormatters() ;
+            /*********************************************/
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             /*****************************************************************/
 
 
             var app = builder.Build();
+            await app.SeedDataAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -12,7 +12,7 @@ namespace Lms.Core.Enteties
         public string Title { get; set; } = string.Empty;
         public DateTime Time { get; set; }
 
-       // public Tournament tournament { get; set; } = new Tournament(); //Nav. Prop.
+       //public Tournament tournament { get; set; } = new Tournament(); //Nav. Prop.
         public int TournamentId { get; set; } //FK
     }
 }
